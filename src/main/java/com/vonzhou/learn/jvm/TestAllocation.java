@@ -10,7 +10,8 @@ public class TestAllocation {
 
     public static void main(String[] args) {
 //        testAllocation();
-        testPretenureSizeThrehold();
+//        testPretenureSizeThrehold();
+        testTenuringThreshold();
     }
 
     /**
@@ -83,5 +84,56 @@ public class TestAllocation {
      */
     public static void testPretenureSizeThrehold() {
         byte[] a = new byte[4 * _1MB];
+    }
+
+    /**
+     * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC  -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=1 -XX:+PrintTenuringDistribution
+     *
+     [GC (Allocation Failure) [DefNew
+     Desired survivor size 524288 bytes, new threshold 1 (max 1)
+     - age   1:     924384 bytes,     924384 total
+     : 5992K->902K(9216K), 0.0026823 secs] 5992K->4998K(19456K), 0.0027163 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
+     [GC (Allocation Failure) [DefNew
+     Desired survivor size 524288 bytes, new threshold 1 (max 1)
+     : 4998K->0K(9216K), 0.0008802 secs] 9094K->4985K(19456K), 0.0008998 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
+     Heap
+     def new generation   total 9216K, used 4150K [0x00000000fec00000, 0x00000000ff600000, 0x00000000ff600000)
+     eden space 8192K,  50% used [0x00000000fec00000, 0x00000000ff00dbf8, 0x00000000ff400000)
+     from space 1024K,   0% used [0x00000000ff400000, 0x00000000ff400000, 0x00000000ff500000) //
+     to   space 1024K,   0% used [0x00000000ff500000, 0x00000000ff500000, 0x00000000ff600000)
+     tenured generation   total 10240K, used 4985K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)
+     the space 10240K,  48% used [0x00000000ff600000, 0x00000000ffade510, 0x00000000ffade600, 0x0000000100000000) //
+     Metaspace       used 3173K, capacity 4494K, committed 4864K, reserved 1056768K
+     class space    used 348K, capacity 386K, committed 512K, reserved 1048576K
+
+     *******************************************************************************************
+     * -XX:MaxTenuringThreshold=15 的情况
+     *
+     [GC (Allocation Failure) [DefNew
+     Desired survivor size 524288 bytes, new threshold 1 (max 15)
+     - age   1:     909656 bytes,     909656 total
+     : 5992K->888K(9216K), 0.0028132 secs] 5992K->4984K(19456K), 0.0028437 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
+     [GC (Allocation Failure) [DefNew
+     Desired survivor size 524288 bytes, new threshold 15 (max 15)
+     : 4984K->0K(9216K), 0.0008209 secs] 9080K->4984K(19456K), 0.0008353 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]
+     Heap
+     def new generation   total 9216K, used 4150K [0x00000000fec00000, 0x00000000ff600000, 0x00000000ff600000)
+     eden space 8192K,  50% used [0x00000000fec00000, 0x00000000ff00dbf8, 0x00000000ff400000)
+     from space 1024K,   0% used [0x00000000ff400000, 0x00000000ff400000, 0x00000000ff500000)
+     to   space 1024K,   0% used [0x00000000ff500000, 0x00000000ff500000, 0x00000000ff600000)
+     tenured generation   total 10240K, used 4984K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)
+     the space 10240K,  48% used [0x00000000ff600000, 0x00000000ffade168, 0x00000000ffade200, 0x0000000100000000)
+     Metaspace       used 3005K, capacity 4494K, committed 4864K, reserved 1056768K
+     class space    used 330K, capacity 386K, committed 512K, reserved 1048576K
+
+     * 结果并非如书中所说（P96）
+     */
+    public static void testTenuringThreshold() {
+        byte[] a1, a2, a3;
+        a1 = new byte[_1MB / 4];
+        a2 = new byte[4 * _1MB];
+        a3 = new byte[4 * _1MB];
+        a3 = null;
+        a3 = new byte[4 * _1MB];
     }
 }
