@@ -30,11 +30,11 @@ public class TestAllocation {
     
      * 内存布局：
      * ------------------------------------------------------------------
-     * from | to |     eden                |          old               |
+     *     eden                 |from | to |          old               |
      * ------------------------------------------------------------------
-     * 1M     1M         8M                       10M
+     *       8M                  1M    1M            10M
     
-     a1 = new byte[2 * _1MB];  // from survivor 不够，进入 Eden
+     a1 = new byte[2 * _1MB];  // 进入 Eden
      a2 = new byte[2 * _1MB]; // 进入 Eden
      a3 = new byte[2 * _1MB];  // 进入 Eden
      a4 = new byte[4 * _1MB];  // 年轻代需要GC， Minor GC，之前的6MB进入 old，a4分配到Eden。
