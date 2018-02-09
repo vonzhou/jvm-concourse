@@ -21,6 +21,12 @@ package com.vonzhou.learn.jvm;
  class space    used 329K, capacity 386K, committed 512K, reserved 1048576K
  * 
  * 虽然有相互引用，但是还是进行了回收。
+ *
+ * GC 日志的分析：
+ * 开头的GC，Full GC 表示GC的停顿类型
+ * PSYoungGen 表示发生的区域及收集器类型
+ * [PSYoungGen: 9339K->712K(76288K)] 9339K->720K(251392K)  GC前年轻代使用9339K，GC后占用712K，该区域总容量76288K。GC前java heap占用9339K，GC后720K，java堆总容量251392K。
+ *
  * 
  * @version 2018/2/8.
  */
