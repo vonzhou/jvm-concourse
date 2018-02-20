@@ -1,4 +1,4 @@
-package com.vonzhou.learn.jvm.ch07class;
+package com.vonzhou.learn.jvm.ch06class;
 
 /**
  * Created by vonzhou on 2018/2/20.

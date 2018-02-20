@@ -1,4 +1,4 @@
-package com.vonzhou.learn.jvm.ch07class;
+package com.vonzhou.learn.jvm.ch06class;
 
 /**
  * 验证：内部类的字节码结构

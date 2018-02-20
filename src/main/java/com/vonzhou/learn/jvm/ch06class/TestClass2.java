@@ -1,4 +1,4 @@
-package com.vonzhou.learn.jvm.ch07class;
+package com.vonzhou.learn.jvm.ch06class;
 
 /**
  * 验证：静态变量类型的字段会存在 ConstantValue 属性

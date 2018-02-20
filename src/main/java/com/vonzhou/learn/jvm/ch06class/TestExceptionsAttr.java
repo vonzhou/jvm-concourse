@@ -1,4 +1,4 @@
-package com.vonzhou.learn.jvm.ch07class;
+package com.vonzhou.learn.jvm.ch06class;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
