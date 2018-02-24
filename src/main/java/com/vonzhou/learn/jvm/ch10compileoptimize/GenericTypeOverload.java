@@ -1,5 +1,6 @@
 package com.vonzhou.learn.jvm.ch10compileoptimize;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,8 +16,12 @@ public class GenericTypeOverload {
         return "";
     }
 
-    public static int method(List<Integer> list) {
-        return 1;
+//    public static int method(List<Integer> list) {
+//        return 1;
+//    }
+
+    public static void main(String[] args) {
+        method(Arrays.asList("1"));
     }
 
 }
